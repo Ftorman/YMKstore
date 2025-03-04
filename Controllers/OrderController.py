@@ -30,6 +30,7 @@ class OrderController:
     @classmethod
     def count_goods(cls):
         count = Orders.select().count()
+        return count
 
 if __name__ == "__main__":
     for row in OrderController.get():

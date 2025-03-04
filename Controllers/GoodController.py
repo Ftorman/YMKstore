@@ -24,3 +24,4 @@ class OrderController:
     @classmethod
     def count_goods(cls):
         count = Goods.select().count()
+        return count
