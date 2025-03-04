@@ -1,4 +1,5 @@
 from Models.Users import *
+from bcrypt import hashpw, gensalt, checkpw
 
 class OrderController:
     @classmethod
@@ -10,10 +11,19 @@ class OrderController:
         return Users.get_or_none(id)
 
     @classmethod
-    def add(cls, login, password, role_id):
+    def registration(cls, login, password, role_id):
+        hash_password = hashpw(password.encode('utf-8'),gensalt())
         Users.create(login = login,
                      password = password,
                      role_id = role_id)
+
+    def login(cls, login, password):
+        if Users.get_or_none(Users.login == login)  != None:
+            hspassword = Users.get_or_none(Users.login == login).password
+
+            if checkpw(password.encode('utf-8'),hspassword.encode('utf-8')):
+                return True
+        return False
 
     @classmethod
     def update(cls, id, **filds):
@@ -22,10 +32,8 @@ class OrderController:
 
     @classmethod
     def delete(cls, *id):
-        for Orders in id:
-            Orders.delete_by_id(Orders)
+        for good_orders in id:
+            Users.delete_by_id(good_orders)
 
-    @classmethod
-    def count_goods(cls):
-        count = Users.select().count()
-        return count
+if __name__ == "__main__":
+
