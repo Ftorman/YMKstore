@@ -1,6 +1,6 @@
-from Models.Stasuses import *
+from Models.Statuses import *
 
-class StasusController:
+class StatusController:
     # метод вывода всех записей таблицы Статусы
     @classmethod
     def get(cls):
@@ -11,6 +11,6 @@ class StasusController:
         return Statuses.get_or_none(id)
 
 if __name__ == "__main__":
-    for row in StasusController.get():
-        print(row.id, row.stasus_name)
-    print(StasusController.show(11))
+    for row in StatusController.get():
+        print(row.id, row.status_name)
+    print(StatusController.show(2))
