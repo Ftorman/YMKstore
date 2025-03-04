@@ -25,7 +25,7 @@ class OrderController:
     @classmethod
     def delete(cls, *id):
         for Orders in id:
-            Orders.delete_by_id(goods)
+            Orders.delete_by_id(Orders)
 
     @classmethod
     def count_goods(cls):
