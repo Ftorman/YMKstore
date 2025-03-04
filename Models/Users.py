@@ -1,7 +1,7 @@
 from Models.Base import *
 
-class Statuses(Base):
+class Users(Base):
     id = PrimaryKeyField()
-    login = CharField()
-    password = CharField()
-    role_id = CharField()
+    login = DateTimeField()
+    password = BigIntegerField()
+    role_id = IntegerField()
