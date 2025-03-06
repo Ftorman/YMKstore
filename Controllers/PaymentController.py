@@ -1,6 +1,8 @@
+from datetime import datetime
+
 from Models.Payments import *
 
-class OrderController:
+class PaymentController:
     @classmethod
     def get(cls):
         return Payments.select()
@@ -10,16 +12,11 @@ class OrderController:
         return Payments.get_or_none(id)
 
     @classmethod
-    def add(cls, payment, date):
+    def add(cls, payment, date = datetime.now()):
         Payments.create(payment = payment,
                         date = date)
 
-    @classmethod
-    def update(cls, id, **filds):
-        for key, value in filds.items():
-            Payments.update({key: value}).where(Payments.id == id).execute()
-
-    @classmethod
-    def count_goods(cls):
-        count = Payments.select().count()
-        return count
+if __name__ == "__main__":
+    PaymentController.add(1662.25)
+    for row in PaymentController.get():
+        print(row.id, row.payment, row.date)
