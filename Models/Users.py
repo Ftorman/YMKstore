@@ -5,3 +5,6 @@ class Users(Base):
     login = DateTimeField()
     password = BigIntegerField()
     role_id = IntegerField()
+
+    class Meta:
+        table_name = 'Users'

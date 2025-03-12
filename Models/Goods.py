@@ -6,3 +6,6 @@ class Goods(Base):
     cost = DecimalField(6,2)
     quantity = IntegerField()
     description = TextField()
+
+    class Meta:
+        table_name = 'Goods'

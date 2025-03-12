@@ -10,3 +10,6 @@ class Orders(Base):
     delivery_data = CharField()
     client_id = ForeignKeyField(Users)
     status_id = ForeignKeyField(Statuses)
+
+    class Meta:
+        table_name = 'Orders'

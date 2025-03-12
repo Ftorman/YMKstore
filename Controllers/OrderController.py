@@ -11,6 +11,8 @@ class OrderController:
 
     @classmethod
     def add(cls, date, payment_id, delivery_data, client_id, status_id):
+        if payment_id is not None:
+            status_id = 6
         Orders.create(date = date, payment_id = payment_id, delivery_data = delivery_data, client_id = 5, status_id = 3)
 
     @classmethod
@@ -24,4 +26,4 @@ class OrderController:
 
 
 if __name__ == "__main__":
-    OrderController.add('2025-03-06', 1, 'На складе', 9, 5)
+    OrderController.add('2025-02-02', 1, 'В пути', 9, 5)

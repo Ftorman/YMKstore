@@ -6,3 +6,6 @@ class Good_Orders(Base):
     id = PrimaryKeyField()
     order_id = ForeignKeyField(Orders)
     good_id = ForeignKeyField(Goods)
+
+    class Meta:
+        table_name = 'Good_Orders'

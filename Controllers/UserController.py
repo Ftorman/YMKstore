@@ -1,7 +1,7 @@
 from Models.Users import *
 from bcrypt import hashpw, gensalt, checkpw
 
-class OrderController:
+class UserController:
     @classmethod
     def get(cls):
         return Users.select()
@@ -36,4 +36,11 @@ class OrderController:
             Users.delete_by_id(good_orders)
 
 if __name__ == "__main__":
-
+    #UserController.registration('Ivan_2023', 'ivan1', '1')
+    #UserController.registration('Ivan_2023', 'ivan1', '2')
+    #UserController.registration('mARIA_666', 'ivan1', '3')
+    #UserController.registration('Josh', 'ivan1', '4')
+    #UserController.registration('Sigma', 'ivan1', '5')
+    #for row in UserController.get():
+    #   print(row.id, row.login, row.password, row.role_id)
+    print(UserController.login('Ivan_2023', 'ivan1'))
