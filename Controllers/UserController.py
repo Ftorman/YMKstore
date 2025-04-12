@@ -1,5 +1,5 @@
 from Models.Users import *
-from bcrypt import hashpw, gensalt, checkpw
+import bcrypt
 
 class UserController:
     @classmethod
@@ -7,23 +7,35 @@ class UserController:
         return Users.select()
 
     @classmethod
-    def show(cls):
+    def show(cls, id):
         return Users.get_or_none(id)
 
     @classmethod
-    def registration(cls, login, password, role_id):
-        hash_password = hashpw(password.encode('utf-8'),gensalt())
-        Users.create(login = login,
-                     password = password,
-                     role_id = role_id)
+    def show_login(cls,login):
+        return Users.get_or_none(Users.login==login)
 
-    def login(cls, login, password):
-        if Users.get_or_none(Users.login == login)  != None:
-            hspassword = Users.get_or_none(Users.login == login).password
 
-            if checkpw(password.encode('utf-8'),hspassword.encode('utf-8')):
+    @classmethod
+    def registration(cls,login,password):
+        try:
+            password = bcrypt.hashpw(password.encode('utf8'),bcrypt.gensalt())
+            Users.create(login=login,password=password,role_id=3)
+        except Exception as error:
+            print(error)
+
+    @classmethod
+    def auth(cls,login,password):
+        try:
+            user = Users.get_or_none(Users.login == login)
+            if user is None:
+                return False
+            if bcrypt.checkpw(password.encode('utf8'), user.password.encode('utf8')):
                 return True
-        return False
+            else:
+                return False
+        except Exception as error:
+            print(error)
+
 
     @classmethod
     def update(cls, id, **filds):
@@ -32,15 +44,13 @@ class UserController:
 
     @classmethod
     def delete(cls, *id):
-        for good_orders in id:
-            Users.delete_by_id(good_orders)
+            for good_orders in id:
+                Users.delete_by_id(good_orders)
+
 
 if __name__ == "__main__":
-    #UserController.registration('Ivan_2023', 'ivan1', '1')
-    #UserController.registration('Ivan_2023', 'ivan1', '2')
-    #UserController.registration('mARIA_666', 'ivan1', '3')
-    #UserController.registration('Josh', 'ivan1', '4')
-    #UserController.registration('Sigma', 'ivan1', '5')
-    #for row in UserController.get():
-    #   print(row.id, row.login, row.password, row.role_id)
-    print(UserController.login('Ivan_2023', 'ivan1'))
+    UserController.registration('lEnA', '123456')
+
+    # for row in UserController.get():
+    #     print(row.id, row.login, row.password, row.role_id)
+    # print(UserController.login('Ivan_2023', 'ivan'))

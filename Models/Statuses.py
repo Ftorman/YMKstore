@@ -4,5 +4,5 @@ class Statuses(Base):
     id = PrimaryKeyField()
     status_name = CharField()
 
-    class Meta:
-        table_name = 'Statuses'
+if __name__ == "__main__":
+    connect().create_tables([Statuses])

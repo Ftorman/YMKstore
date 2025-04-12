@@ -6,9 +6,8 @@ class RoleController:
         return Roles.select()
 
     @classmethod
-    def show(cls):
+    def show(cls, id):
         return Roles.get_or_none(id)
 
 if __name__ == "__main__":
-    for row in RoleController.get():
-        print(row.id, row.role_name)
+    pass

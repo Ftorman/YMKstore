@@ -1,10 +1,14 @@
+
 from Models.Base import *
+from Models.Roles import Roles
+from flask_login import UserMixin
 
-class Users(Base):
+
+class Users(UserMixin, Base):
     id = PrimaryKeyField()
-    login = DateTimeField()
-    password = BigIntegerField()
-    role_id = IntegerField()
+    login = CharField(unique=True)
+    password = CharField()
+    role_id = ForeignKeyField(Roles)
 
-    class Meta:
-        table_name = 'Users'
+if __name__ == "__main__":
+    connect().create_tables([Users])
